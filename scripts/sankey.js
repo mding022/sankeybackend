@@ -12,7 +12,7 @@ const runSankeyAutomation = async (inputData) => {
     const downloadPath = __dirname;
 
     const browser = await puppeteer.launch({
-        headless: false,
+        headless: true,
         args: [
             '--disable-extensions',
             '--no-sandbox',

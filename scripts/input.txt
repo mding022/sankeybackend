@@ -1,3 +1,6 @@
-Income [500] Budget
-Investments [500] Budget
-Budget [1000] Rent
+gambling [1000] Budget
+paycheck [2000] Budget
+robbery [5000] Budget
+Budget [1000] new computer
+Budget [3000] rent
+Budget [5000.00] Surplus Budget
