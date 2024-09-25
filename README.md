@@ -1,4 +1,4 @@
-# Backend for my user-friendly Sankey Diagram generator.
+# Spring API for my user-friendly Sankey Diagram generator.
 
 To generate the diagram, it will scrape SankeyMatic's static page with puppeteer.js. 
 
