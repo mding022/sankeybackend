@@ -1,6 +1,6 @@
-gambling [1000] Budget
+hard work [1000] Budget
 paycheck [2000] Budget
-robbery [5000] Budget
+investments [15000] Budget
 Budget [1000] new computer
 Budget [3000] rent
-Budget [5000.00] Surplus Budget
+Budget [14000.00] Surplus Budget
