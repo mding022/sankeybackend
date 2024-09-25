@@ -1,9 +1,1 @@
-Jeemy Cooks [3334] Budget
-Gambling [34555] Budget
-Income [3000] Budget
-Budget [9988] James Charles
-Budget [8000] Shopping
-Budget [10000] Eating
-Budget [20000] Gambling
-Shortfall [7099.00] Budget
-:Shortfall #f54e42
+Placeholder
