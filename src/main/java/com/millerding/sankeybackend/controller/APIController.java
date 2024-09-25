@@ -44,7 +44,7 @@ public class APIController {
             lines.add(String.format("Budget [%s] %s", outputs[i], outputLabels[i]));
         }
         if(budget > 0) {
-            lines.add(String.format("Budget [%s] Surplus Budget", String.format("%.2f", budget)));
+            lines.add(String.format("Budget [%s] Surplus", String.format("%.2f", budget)));
             lines.add(":Surplus #66ee71");
         }
         if(budget < 0) {
