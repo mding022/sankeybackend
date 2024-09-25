@@ -25,7 +25,7 @@ import com.millerding.sankeybackend.service.SankeyService;
 import com.millerding.sankeybackend.service.impl.SankeyServiceImpl;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000", "https://chart.millerding.com"})
 public class APIController {
 
     static SankeyService sankeyService = new SankeyServiceImpl();
@@ -78,6 +78,6 @@ public class APIController {
         }
 
         String res = sankeyService.buildSankey(dimension);
-        return res.equals("-1") ? "Error!" : "http://localhost:8080/img/"+res+".png";
+        return res.equals("-1") ? "Error!" : "https://api.millerding.com/img/"+res+".png";
     }
 }

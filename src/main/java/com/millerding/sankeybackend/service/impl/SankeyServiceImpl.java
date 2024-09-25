@@ -10,6 +10,9 @@ import java.util.*;
 
 import com.millerding.sankeybackend.service.SankeyService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class SankeyServiceImpl implements SankeyService {
     public void write(ArrayList<String> input) {
         String filePath = "scripts/input.txt";
@@ -42,7 +45,9 @@ public class SankeyServiceImpl implements SankeyService {
             e.printStackTrace();
         }
 
-        return uuid;
+        runNodeScript("scripts/process.js", uuid);
+
+        return uuid + "p";
     }
 
     public int runNodeScript(String scriptPath, String dimension) {
@@ -54,7 +59,7 @@ public class SankeyServiceImpl implements SankeyService {
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String line;
             while ((line = reader.readLine()) != null) {
-                System.out.println(line);
+                log.info(line); //log script status msg's
             }
             return 0;
         } catch (Exception e) {
