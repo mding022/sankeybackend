@@ -5,7 +5,7 @@ target/
 !**/src/test/**/target/
 node_modules/
 src/main/resources/public/images/
-scripts/input.txt
+/scripts/*.txt
 
 ### STS ###
 .apt_generated
