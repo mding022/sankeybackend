@@ -13,22 +13,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.millerding.sankeybackend.service.SankeyService;
 import com.millerding.sankeybackend.service.impl.SankeyServiceImpl;
 
-@Controller
+@RestController
 public class APIController {
 
     static SankeyService sankeyService = new SankeyServiceImpl();
 
     @GetMapping("/")
-    public static String auth() {
+    public String auth() {
         return "Successfully connected";
     }
 
     @PostMapping("/build")
-    public static String buildSankey(@RequestParam("incomes") String[] incomes,
+    public String buildSankey(@RequestParam("incomes") String[] incomes,
             @RequestParam("ilabels") String[] incomeLabels, @RequestParam("outputs") String[] outputs,
             @RequestParam("olabels") String[] outputLabels) {
 
@@ -47,6 +48,7 @@ public class APIController {
         }
         sankeyService.write(lines);
 
-        return sankeyService.buildSankey() ? "Success" : "Error";
+        String res = sankeyService.buildSankey();
+        return res.equals("-1") ? "Error!" : "http://localhost:8080/images/"+res+".png";
     }
 }
