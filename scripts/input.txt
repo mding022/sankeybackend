@@ -1,0 +1,3 @@
+Income [500] Budget
+Investments [500] Budget
+Budget [1000] Rent
