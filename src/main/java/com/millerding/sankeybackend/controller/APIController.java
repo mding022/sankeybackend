@@ -45,10 +45,12 @@ public class APIController {
         }
         if(budget > 0) {
             lines.add(String.format("Budget [%s] Surplus Budget", String.format("%.2f", budget)));
+            lines.add(":Surplus #66ee71");
         }
         if(budget < 0) {
             budget *= -1;
             lines.add(String.format("Shortfall [%s] Budget", String.format("%.2f", budget)));
+            lines.add(":Shortfall #f54e42");
         }
         sankeyService.write(lines);
 
