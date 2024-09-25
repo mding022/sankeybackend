@@ -8,5 +8,5 @@ import org.springframework.stereotype.Service;
 public interface SankeyService {
     public void write(ArrayList<String> input);
 
-    public String buildSankey();
+    public String buildSankey(String dimension);
 }

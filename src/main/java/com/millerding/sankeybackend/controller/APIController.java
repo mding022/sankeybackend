@@ -9,8 +9,14 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,6 +25,7 @@ import com.millerding.sankeybackend.service.SankeyService;
 import com.millerding.sankeybackend.service.impl.SankeyServiceImpl;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class APIController {
 
     static SankeyService sankeyService = new SankeyServiceImpl();
@@ -26,6 +33,14 @@ public class APIController {
     @GetMapping("/")
     public String auth() {
         return "Successfully connected";
+    }
+
+    @GetMapping("/img/{filename:.+}")
+    public ResponseEntity<Resource> getImage(@PathVariable String filename) {
+        Resource file = new ClassPathResource("public/images/" + filename);
+        return ResponseEntity.ok()
+                .contentType(MediaType.IMAGE_PNG)
+                .body(file);
     }
 
     @PostMapping("/build")
@@ -54,7 +69,15 @@ public class APIController {
         }
         sankeyService.write(lines);
 
-        String res = sankeyService.buildSankey();
-        return res.equals("-1") ? "Error!" : "http://localhost:8080/images/"+res+".png";
+        String dimension = "600";
+        if(lines.size() < 8) {
+            dimension = "400";
+        }
+        else if(lines.size() < 12) {
+            dimension = "500";
+        }
+
+        String res = sankeyService.buildSankey(dimension);
+        return res.equals("-1") ? "Error!" : "http://localhost:8080/img/"+res+".png";
     }
 }

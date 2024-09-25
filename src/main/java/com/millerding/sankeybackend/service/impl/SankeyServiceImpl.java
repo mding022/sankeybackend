@@ -25,8 +25,8 @@ public class SankeyServiceImpl implements SankeyService {
         }
     }
 
-    public String buildSankey() {
-        if (runNodeScript("scripts/sankey.js") != 0) {
+    public String buildSankey(String dimension) {
+        if (runNodeScript("scripts/sankey.js", dimension) != 0) {
             return "-1";
         }
         String uuid = UUID.randomUUID().toString();
@@ -45,8 +45,8 @@ public class SankeyServiceImpl implements SankeyService {
         return uuid;
     }
 
-    public int runNodeScript(String scriptPath) {
-        ProcessBuilder processBuilder = new ProcessBuilder("node", scriptPath);
+    public int runNodeScript(String scriptPath, String dimension) {
+        ProcessBuilder processBuilder = new ProcessBuilder("node", scriptPath, dimension);
         processBuilder.redirectErrorStream(true);
         
         try {
