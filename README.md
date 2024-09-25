@@ -12,12 +12,10 @@ mvn spring-boot:run
 ```
 
 # Usage
-Install dependencies:
 ```sh
 POST localhost:8080/build
 ```
 Use Form-Data with the following data:
-Install dependencies:
 ```sh
 incomes | 10000,50000,500
 ilabels | Investments,Paystub,Lottery
