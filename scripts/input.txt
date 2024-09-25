@@ -1,12 +1,4 @@
-g [12] Budget
-ee [12] Budget
-ce [442] Budget
-fg2 [334] Budget
-f42 [31] Budget
-ccccc [444] Budget
-de [32] Budget
-Budget [33] f
-Budget [29] s
-Budget [1000] dd
-Budget [245.00] Surplus
-:Surplus #66ee71
+3 [4] Budget
+Budget [6] 5
+Shortfall [2.00] Budget
+:Shortfall #f54e42
