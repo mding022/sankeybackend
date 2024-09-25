@@ -14,9 +14,15 @@ mvn spring-boot:run
 ```
 
 # Usage
+<<<<<<< HEAD
 ```sh
 POST localhost:8080/build
 ```
+=======
+
+<span style="color: orange; font-weight: bold;">POST</span> localhost:8080/build
+
+>>>>>>> 4e5909275eb6fc6c0be010fb9de73f5dea3a09f1
 Use Form-Data with the following data:
 ```sh
 incomes | 10000,50000,500
