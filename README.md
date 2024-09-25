@@ -24,3 +24,5 @@ ilabels | Investments,Paystub,Lottery
 outputs | 15000,10000,900,3000,10000
 olabels | Rent,Taxes,Laptop,Shopping,Restaurants
 ```
+Here is the example generated:
+![Example](example.png)
