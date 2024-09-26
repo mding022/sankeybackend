@@ -18,6 +18,7 @@ const runSankeyAutomation = async (inputData, size) => {
             '--no-sandbox',
             '--disable-setuid-sandbox',
         ],
+        executablePath: '/usr/bin/chromium-browser'
     });
 
     const page = await browser.newPage();
