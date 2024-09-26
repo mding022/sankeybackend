@@ -4,7 +4,6 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 node_modules/
-src/main/resources/public/images/
 scripts/input.txt
 
 ### STS ###
