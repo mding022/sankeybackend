@@ -42,6 +42,6 @@ public class WorkerController {
         }
 
         String res = sankeyService.buildSankey(dimension);
-        return res.equals("-1") ? "Error!" : "https://api.millerding.com/img/"+res+".png";
+        return res.equals("-1") ? "Error!" : "https://sankey.millerding.com/img/"+res+".png";
     }
 }
