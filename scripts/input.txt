@@ -1,4 +1,10 @@
-3 [4] Budget
-Budget [6] 5
-Shortfall [2.00] Budget
-:Shortfall #f54e42
+Investments [10000] Budget
+Paystub [50000] Budget
+Lottery [500] Budget
+Budget [15000] Rent
+Budget [10000] Taxes
+Budget [900] Laptop
+Budget [3000] Shopping
+Budget [10000] Restaurants
+Budget [21600.00] Surplus
+:Surplus #66ee71

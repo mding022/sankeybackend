@@ -42,42 +42,4 @@ public class APIController {
                 .contentType(MediaType.IMAGE_PNG)
                 .body(file);
     }
-
-    @PostMapping("/build")
-    public String buildSankey(@RequestParam("incomes") String[] incomes,
-            @RequestParam("ilabels") String[] incomeLabels, @RequestParam("outputs") String[] outputs,
-            @RequestParam("olabels") String[] outputLabels) {
-
-        ArrayList<String> lines = new ArrayList<String>();
-        double budget = 0;
-        for(int i = 0; i < incomes.length; ++i) {
-            budget += Double.valueOf(incomes[i]);
-            lines.add(String.format("%s [%s] Budget", incomeLabels[i], incomes[i]));
-        }
-        for(int i = 0; i < outputs.length; ++i) {
-            budget -= Double.valueOf(outputs[i]);
-            lines.add(String.format("Budget [%s] %s", outputs[i], outputLabels[i]));
-        }
-        if(budget > 0) {
-            lines.add(String.format("Budget [%s] Surplus", String.format("%.2f", budget)));
-            lines.add(":Surplus #66ee71");
-        }
-        if(budget < 0) {
-            budget *= -1;
-            lines.add(String.format("Deficit [%s] Budget", String.format("%.2f", budget)));
-            lines.add(":Deficit #f54e42");
-        }
-        sankeyService.write(lines);
-
-        String dimension = "600";
-        if(lines.size() < 8) {
-            dimension = "400";
-        }
-        else if(lines.size() < 12) {
-            dimension = "500";
-        }
-
-        String res = sankeyService.buildSankey(dimension);
-        return res.equals("-1") ? "Error!" : "https://api.millerding.com/img/"+res+".png";
-    }
 }

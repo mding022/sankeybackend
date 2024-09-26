@@ -53,18 +53,49 @@ public class SankeyServiceImpl implements SankeyService {
     public int runNodeScript(String scriptPath, String dimension) {
         ProcessBuilder processBuilder = new ProcessBuilder("node", scriptPath, dimension);
         processBuilder.redirectErrorStream(true);
-        
+
         try {
             Process process = processBuilder.start();
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String line;
             while ((line = reader.readLine()) != null) {
-                log.info(line); //log script status msg's
+                log.info(line); // log script status msg's
             }
             return 0;
         } catch (Exception e) {
             e.printStackTrace();
             return -1;
         }
+    }
+
+    public ArrayList<String> parse(int type, List<String[]> data) {
+        ArrayList<String> lines = new ArrayList<String>();
+        switch (type) {
+            case 1:
+                String[] incomes = data.get(0);
+                String[] incomeLabels = data.get(1);
+                String[] outputs = data.get(2);
+                String[] outputLabels = data.get(3);
+                double budget = 0;
+                for (int i = 0; i < incomes.length; ++i) {
+                    budget += Double.valueOf(incomes[i]);
+                    lines.add(String.format("%s [%s] Budget", incomeLabels[i], incomes[i]));
+                }
+                for (int i = 0; i < outputs.length; ++i) {
+                    budget -= Double.valueOf(outputs[i]);
+                    lines.add(String.format("Budget [%s] %s", outputs[i], outputLabels[i]));
+                }
+                if (budget > 0) {
+                    lines.add(String.format("Budget [%s] Surplus", String.format("%.2f", budget)));
+                    lines.add(":Surplus #66ee71");
+                }
+                if (budget < 0) {
+                    budget *= -1;
+                    lines.add(String.format("Deficit [%s] Budget", String.format("%.2f", budget)));
+                    lines.add(":Deficit #f54e42");
+                }
+                break;
+        }
+        return lines;
     }
 }
