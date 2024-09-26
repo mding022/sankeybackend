@@ -37,9 +37,13 @@ public class APIController {
 
     @GetMapping("/img/{filename:.+}")
     public ResponseEntity<Resource> getImage(@PathVariable String filename) {
+        try {
         Resource file = new ClassPathResource("public/images/" + filename);
         return ResponseEntity.ok()
                 .contentType(MediaType.IMAGE_PNG)
                 .body(file);
+        } catch(Exception e) {
+            return null;
+        }
     }
 }
