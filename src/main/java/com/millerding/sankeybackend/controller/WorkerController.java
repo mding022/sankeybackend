@@ -24,6 +24,8 @@ public class WorkerController {
             @RequestParam("ilabels") String[] incomeLabels, @RequestParam("outputs") String[] outputs,
             @RequestParam("olabels") String[] outputLabels) {
 
+        String uuid = UUID.randomUUID().toString();
+
         List<String[]> data = new ArrayList<String[]>(4);
         data.add(incomes);
         data.add(incomeLabels);
@@ -31,7 +33,7 @@ public class WorkerController {
         data.add(outputLabels);
         
         ArrayList<String> lines = sankeyService.parse(1, data);
-        sankeyService.write(lines);
+        sankeyService.write(lines, uuid);
 
         String dimension = "600";
         if(lines.size() < 8) {
@@ -41,7 +43,7 @@ public class WorkerController {
             dimension = "500";
         }
 
-        String res = sankeyService.buildSankey(dimension);
+        String res = sankeyService.buildSankey(dimension, uuid);
         return res.equals("-1") ? "Error!" : "https://sankey.millerding.com/img/"+res+".png";
     }
 }

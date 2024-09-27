@@ -63,7 +63,9 @@ const runSankeyAutomation = async (inputData, size) => {
     return 'Success';
 };
 
-const inputFilePath = path.join(__dirname, 'input.txt');
+const uuid = process.argv[3] ? process.argv[3] : 'default-uuid';
+
+const inputFilePath = path.join(__dirname, uuid +'.txt');
 
 const size = process.argv[2] ? parseInt(process.argv[2], 10) : 400; 
 

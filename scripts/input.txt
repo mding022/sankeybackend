@@ -1,4 +1,0 @@
-F [8800] Budget
-Budget [9902] G
-Deficit [1102.00] Budget
-:Deficit #f54e42

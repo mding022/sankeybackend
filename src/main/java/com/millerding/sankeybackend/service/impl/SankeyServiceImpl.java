@@ -14,8 +14,8 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class SankeyServiceImpl implements SankeyService {
-    public void write(ArrayList<String> input) {
-        String filePath = "scripts/input.txt";
+    public void write(ArrayList<String> input, String uuid) {
+        String filePath = "scripts/" + uuid + ".txt";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             for (String line : input) {
                 if (!line.trim().isEmpty()) {
@@ -28,11 +28,10 @@ public class SankeyServiceImpl implements SankeyService {
         }
     }
 
-    public String buildSankey(String dimension) {
-        if (runNodeScript("scripts/sankey.js", dimension) != 0) {
+    public String buildSankey(String dimension, String uuid) {
+        if (runNodeScript("scripts/sankey.js", dimension, uuid) != 0) {
             return "-1";
         }
-        String uuid = UUID.randomUUID().toString();
         Path sourcePath = Paths.get("scripts/");
         Path targetPath = Paths.get("src/main/resources/public/images", uuid + ".png");
 
@@ -45,13 +44,19 @@ public class SankeyServiceImpl implements SankeyService {
             e.printStackTrace();
         }
 
-        runNodeScript("scripts/process.js", uuid);
-
+        runNodeScript("scripts/process.js", uuid, null);
+        File file = new File("scripts/" + uuid + ".txt");
+        file.delete();
         return uuid + "p";
     }
 
-    public int runNodeScript(String scriptPath, String dimension) {
-        ProcessBuilder processBuilder = new ProcessBuilder("node", scriptPath, dimension);
+    public int runNodeScript(String scriptPath, String dimension, String uuid) {
+        ProcessBuilder processBuilder;
+        if (scriptPath.equals("scripts/process.js")) {
+            processBuilder = new ProcessBuilder("node", scriptPath, dimension);
+        } else {
+            processBuilder = new ProcessBuilder("node", scriptPath, dimension, uuid);
+        }
         processBuilder.redirectErrorStream(true);
 
         try {
